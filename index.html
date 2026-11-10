@@ -32,7 +32,7 @@
 
   <style>
     /* ==========================================================================
-       0. PRELOADER INSTITUCIONAL DE ALTA GAMA - AUTOESCOLA TORRENT
+       0. PRELOADER MINIMALISTA - AUTOESCOLA TORRENT
        ========================================================================== */
     html.preloader-active,
     body.preloader-active {
@@ -51,49 +51,26 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background-color: #060911;
-      color: #ffffff;
-      opacity: 1;
-      visibility: visible;
-      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-                  visibility 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+      background: #080d1a;
+      transition: transform 0.85s cubic-bezier(0.77, 0, 0.175, 1);
+      will-change: transform;
       user-select: none;
       -webkit-user-select: none;
     }
 
-    #site-preloader.preloader-hidden {
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-24px);
+    #site-preloader.preloader-slide-up {
+      transform: translateY(-100%);
       pointer-events: none;
-    }
-
-    .preloader-ambient-glow {
-      position: absolute;
-      width: 440px;
-      height: 440px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(33, 83, 145, 0.2) 0%, rgba(255, 194, 25, 0.05) 50%, transparent 75%);
-      filter: blur(65px);
-      pointer-events: none;
-      animation: preloaderAmbientPulse 4.5s ease-in-out infinite alternate;
     }
 
     .preloader-inner {
-      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
-      text-align: center;
-      z-index: 2;
-      width: 100%;
-      max-width: 400px;
-      padding: 0 1.5rem;
+      justify-content: center;
     }
 
-    .preloader-emblem-wrap {
-      position: relative;
+    .preloader-logo-wrap {
       width: 72px;
       height: 72px;
       margin-bottom: 2rem;
@@ -102,102 +79,48 @@
       justify-content: center;
     }
 
-    .preloader-emblem-halo {
-      position: absolute;
-      inset: -5px;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 194, 25, 0.22);
-      box-shadow: 0 0 25px rgba(255, 194, 25, 0.1);
-    }
-
-    .preloader-emblem-pic {
+    .preloader-logo-pic {
+      width: 100%;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 54px;
-      height: 54px;
-      filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.6));
     }
 
-    .preloader-emblem-pic img {
+    .preloader-logo-pic img {
       width: 100%;
       height: 100%;
       object-fit: contain;
+      filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.45));
     }
 
-    .preloader-brand-name {
-      font-family: 'Inter Tight', 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 700;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: #ffffff;
-      margin-bottom: 0.5rem;
-    }
-
-    .preloader-brand-sub {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.65rem;
-      font-weight: 600;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: #64748B;
-      margin-bottom: 2.25rem;
-    }
-
-    .preloader-meter-box {
-      width: 240px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .preloader-line-track {
-      width: 100%;
-      height: 2px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 2px;
+    .preloader-bar-track {
+      width: 180px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
       overflow: hidden;
       position: relative;
     }
 
-    .preloader-line-fill {
+    .preloader-bar-fill {
       position: absolute;
       top: 0;
       left: 0;
       height: 100%;
       width: 0%;
       background: linear-gradient(90deg, #215391 0%, #FFC219 100%);
-      box-shadow: 0 0 10px rgba(255, 194, 25, 0.4);
-      transition: width 0.08s linear;
-    }
-
-    .preloader-counter {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.15em;
-      color: #94A3B8;
-    }
-
-    @keyframes preloaderAmbientPulse {
-      0% {
-        transform: scale(0.92);
-        opacity: 0.45;
-      }
-      100% {
-        transform: scale(1.08);
-        opacity: 0.85;
-      }
+      border-radius: 999px;
+      box-shadow: 0 0 10px rgba(255, 194, 25, 0.5);
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .preloader-ambient-glow {
-        animation: none !important;
-      }
       #site-preloader {
         transition: opacity 0.25s ease;
+      }
+      #site-preloader.preloader-slide-up {
+        opacity: 0;
+        transform: none;
       }
     }
 
@@ -4031,27 +3954,19 @@
 <body class="preloader-active">
 
   <!-- ==========================================================================
-       PRELOADER INSTITUCIONAL DE ALTA GAMA - AUTOESCOLA TORRENT
+       PRELOADER MINIMALISTA - AUTOESCOLA TORRENT
        ========================================================================== -->
-  <div id="site-preloader" role="status" aria-live="polite" aria-label="Cargando Autoescuela Torrent">
-    <div class="preloader-ambient-glow" aria-hidden="true"></div>
+  <div id="site-preloader" role="status" aria-label="Cargando...">
     <div class="preloader-inner">
-      <div class="preloader-emblem-wrap">
-        <div class="preloader-emblem-halo"></div>
-        <picture class="preloader-emblem-pic">
+      <div class="preloader-logo-wrap">
+        <picture class="preloader-logo-pic">
           <source srcset="assets/logo%20favicon.png" type="image/png" />
-          <img src="favicon.ico" alt="Autoescuela Torrent" width="54" height="54" />
+          <img src="favicon.ico" alt="Autoescuela Torrent" width="72" height="72" />
         </picture>
       </div>
 
-      <div class="preloader-brand-name">AUTOESCOLA TORRENT</div>
-      <div class="preloader-brand-sub">CENTRE DE FORMACIÓ VIAL · DESDE 1983</div>
-
-      <div class="preloader-meter-box">
-        <div class="preloader-line-track">
-          <div id="preloaderProgressFill" class="preloader-line-fill"></div>
-        </div>
-        <div id="preloaderPercent" class="preloader-counter">00%</div>
+      <div class="preloader-bar-track">
+        <div id="preloaderProgressFill" class="preloader-bar-fill"></div>
       </div>
     </div>
   </div>
@@ -4060,22 +3975,16 @@
     (function () {
       var preloader = document.getElementById('site-preloader');
       var progressFill = document.getElementById('preloaderProgressFill');
-      var percentText = document.getElementById('preloaderPercent');
 
       if (!preloader) return;
 
       var startTime = performance.now();
-      var duration = 2800; // Tempo refinado de 2.8s para presença premium e sólida
+      var duration = 1600; // Carga ágil e fluida de 1.6s
       var isPageLoaded = false;
       var hasFinished = false;
 
-      function formatNumber(num) {
-        var rounded = Math.min(100, Math.floor(num));
-        return (rounded < 10 ? '0' + rounded : rounded) + '%';
-      }
-
-      function easeOutCubic(t) {
-        return 1 - Math.pow(1 - t, 3);
+      function easeOutQuad(t) {
+        return t * (2 - t);
       }
 
       function tick(now) {
@@ -4083,19 +3992,18 @@
 
         var elapsed = now - startTime;
         var progress = Math.min(1, elapsed / duration);
-        var eased = easeOutCubic(progress);
+        var eased = easeOutQuad(progress);
         var currentPercent = eased * 100;
 
         if (progressFill) progressFill.style.width = currentPercent + '%';
-        if (percentText) percentText.textContent = formatNumber(currentPercent);
 
-        if (progress >= 1 && (isPageLoaded || elapsed >= 3200)) {
+        if (progress >= 1 && (isPageLoaded || elapsed >= 2100)) {
           hasFinished = true;
           if (progressFill) progressFill.style.width = '100%';
-          if (percentText) percentText.textContent = '100%';
 
           setTimeout(function () {
-            preloader.classList.add('preloader-hidden');
+            // A tela inteira desliza para cima revelando o site
+            preloader.classList.add('preloader-slide-up');
             document.documentElement.classList.remove('preloader-active');
             document.body.classList.remove('preloader-active');
             document.body.classList.add('hero-animated');
@@ -4105,7 +4013,7 @@
                 preloader.parentNode.removeChild(preloader);
               }
             }, 900);
-          }, 350);
+          }, 180);
         } else {
           requestAnimationFrame(tick);
         }
@@ -4125,11 +4033,12 @@
       setTimeout(function () {
         isPageLoaded = true;
         if (!document.body.classList.contains('hero-animated')) {
+          preloader.classList.add('preloader-slide-up');
           document.body.classList.add('hero-animated');
           document.documentElement.classList.remove('preloader-active');
           document.body.classList.remove('preloader-active');
         }
-      }, 4200);
+      }, 3500);
     })();
   </script>
 
