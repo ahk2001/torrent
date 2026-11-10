@@ -3881,6 +3881,139 @@
       }
     }
 
+    /* ==========================================================================
+       HERO ENTRANCE STAGGERED ANIMATIONS (Aparición en tiempos escalonados)
+       ========================================================================== */
+    @keyframes heroFadeDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-22px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes heroFadeUp {
+      0% {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes heroCarSlide {
+      0% {
+        opacity: 0;
+        transform: translateX(50px) scale(0.95);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+      }
+    }
+
+    @keyframes heroGlowScale {
+      0% {
+        opacity: 0;
+        transform: scale(0.85);
+      }
+      100% {
+        opacity: 0.85;
+        transform: scale(1);
+      }
+    }
+
+    /* Estado inicial preparado durante el preloader */
+    body.preloader-active .top-bar,
+    body.preloader-active .site-header,
+    body.preloader-active .hero-bg-accent-circle,
+    body.preloader-active .hero-badge-editorial,
+    body.preloader-active .hero-title,
+    body.preloader-active .hero-subtitle,
+    body.preloader-active .hero-actions-group,
+    body.preloader-active .hero-proof-item,
+    body.preloader-active .hero-car-img,
+    body.preloader-active .stats-bar .stat-item {
+      opacity: 0;
+    }
+
+    /* Disparo escalonado en tiempos calibrados cuando termina el preloader */
+    body.hero-animated .top-bar {
+      animation: heroFadeDown 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+    }
+
+    body.hero-animated .site-header {
+      animation: heroFadeDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+    }
+
+    body.hero-animated .hero-bg-accent-circle {
+      animation: heroGlowScale 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+    }
+
+    body.hero-animated .hero-badge-editorial {
+      animation: heroFadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+    }
+
+    body.hero-animated .hero-title {
+      animation: heroFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+    }
+
+    body.hero-animated .hero-subtitle {
+      animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.55s both;
+    }
+
+    body.hero-animated .hero-actions-group {
+      animation: heroFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.7s both;
+    }
+
+    body.hero-animated .hero-car-img {
+      animation: heroCarSlide 1.15s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both;
+    }
+
+    body.hero-animated .hero-proof-item:nth-child(1) {
+      animation: heroFadeUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.85s both;
+    }
+    body.hero-animated .hero-proof-item:nth-child(2) {
+      animation: heroFadeUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.98s both;
+    }
+    body.hero-animated .hero-proof-item:nth-child(3) {
+      animation: heroFadeUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) 1.1s both;
+    }
+
+    body.hero-animated .stats-bar .stat-item:nth-child(1) {
+      animation: heroFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 1.05s both;
+    }
+    body.hero-animated .stats-bar .stat-item:nth-child(2) {
+      animation: heroFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 1.18s both;
+    }
+    body.hero-animated .stats-bar .stat-item:nth-child(3) {
+      animation: heroFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 1.3s both;
+    }
+    body.hero-animated .stats-bar .stat-item:nth-child(4) {
+      animation: heroFadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 1.42s both;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body.hero-animated .top-bar,
+      body.hero-animated .site-header,
+      body.hero-animated .hero-badge-editorial,
+      body.hero-animated .hero-title,
+      body.hero-animated .hero-subtitle,
+      body.hero-animated .hero-actions-group,
+      body.hero-animated .hero-proof-item,
+      body.hero-animated .hero-car-img,
+      body.hero-animated .stats-bar .stat-item {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+
     /* Scroll reveal transitions */
     .reveal-item {
       opacity: 0;
@@ -3965,6 +4098,7 @@
             preloader.classList.add('preloader-hidden');
             document.documentElement.classList.remove('preloader-active');
             document.body.classList.remove('preloader-active');
+            document.body.classList.add('hero-animated');
 
             setTimeout(function () {
               if (preloader.parentNode) {
@@ -3987,10 +4121,15 @@
 
       requestAnimationFrame(tick);
 
-      // Garantia de segurança
+      // Garantia de segurança e acessibilidade
       setTimeout(function () {
         isPageLoaded = true;
-      }, 4000);
+        if (!document.body.classList.contains('hero-animated')) {
+          document.body.classList.add('hero-animated');
+          document.documentElement.classList.remove('preloader-active');
+          document.body.classList.remove('preloader-active');
+        }
+      }, 4200);
     })();
   </script>
 
@@ -4093,7 +4232,7 @@
       <div class="container">
         <div class="hero-grid">
           <!-- Columna Texto y CTA -->
-          <div class="hero-content reveal-item">
+          <div class="hero-content">
             <div class="hero-badge-editorial">
               <span class="hero-badge-dot"></span>
               Centro Oficial DGT · Más de 40 años en Torrent
@@ -4134,7 +4273,7 @@
           </div>
 
           <!-- Columna Imagen: Coche Oficial de Prácticas de Autoescuela Torrent -->
-          <div class="hero-visual-wrapper reveal-item">
+          <div class="hero-visual-wrapper">
             <!-- Imagen del Coche Real de Autoescuela Torrent -->
             <img src="assets/carro.png" alt="Coche de prácticas Volkswagen de Autoescuela Torrent con placa L y rotulación oficial" class="hero-car-img" />
           </div>
@@ -4148,22 +4287,22 @@
     <section class="stats-bar" aria-label="Cifras clave">
       <div class="container">
         <div class="stats-grid">
-          <div class="stat-item reveal-item">
+          <div class="stat-item">
             <div class="stat-number">+40</div>
             <div class="stat-label">Años de Trayectoria</div>
             <div class="stat-sub">Formando conductores desde los 80</div>
           </div>
-          <div class="stat-item reveal-item">
+          <div class="stat-item">
             <div class="stat-number">98%</div>
             <div class="stat-label">Aprobados a la 1ª</div>
             <div class="stat-sub">Método estructurado y ameno</div>
           </div>
-          <div class="stat-item reveal-item">
+          <div class="stat-item">
             <div class="stat-number">1 Pista</div>
             <div class="stat-label">Propia en Torrent</div>
             <div class="stat-sub">C/ dels Traginers (Mas del Jutge)</div>
           </div>
-          <div class="stat-item reveal-item">
+          <div class="stat-item">
             <div class="stat-number">2 Sedes</div>
             <div class="stat-label">Torrent y Valencia</div>
             <div class="stat-sub">Atención de 07:00 a 22:00</div>
