@@ -3287,9 +3287,9 @@
       height: 480px;
       top: -25%;
       right: -10%;
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.55) 0%, rgba(14, 165, 233, 0.3) 45%, transparent 70%);
-      opacity: 0.85;
-      animation: contactFloat1 22s ease-in-out infinite alternate;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.65) 0%, rgba(14, 165, 233, 0.35) 45%, transparent 70%);
+      opacity: 0.9;
+      animation: contactFloat1 9s ease-in-out infinite alternate;
     }
 
     .contact-orb.orb-2 {
@@ -3297,9 +3297,9 @@
       height: 420px;
       top: 15%;
       left: -15%;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.45) 0%, rgba(186, 230, 253, 0.25) 40%, transparent 68%);
-      opacity: 0.75;
-      animation: contactFloat2 26s ease-in-out infinite alternate;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(186, 230, 253, 0.3) 40%, transparent 68%);
+      opacity: 0.8;
+      animation: contactFloat2 11s ease-in-out infinite alternate;
     }
 
     .contact-orb.orb-3 {
@@ -3307,9 +3307,9 @@
       height: 550px;
       bottom: -25%;
       left: 10%;
-      background: radial-gradient(circle, rgba(37, 99, 235, 0.6) 0%, rgba(2, 132, 199, 0.35) 45%, transparent 72%);
-      opacity: 0.9;
-      animation: contactFloat3 24s ease-in-out infinite alternate;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.7) 0%, rgba(2, 132, 199, 0.4) 45%, transparent 72%);
+      opacity: 0.95;
+      animation: contactFloat3 8s ease-in-out infinite alternate;
     }
 
     .contact-orb.orb-4 {
@@ -3317,9 +3317,9 @@
       height: 360px;
       bottom: 20%;
       right: -5%;
-      background: radial-gradient(circle, rgba(14, 165, 233, 0.4) 0%, rgba(3, 105, 161, 0.2) 50%, transparent 70%);
-      opacity: 0.7;
-      animation: contactFloat4 20s ease-in-out infinite alternate;
+      background: radial-gradient(circle, rgba(14, 165, 233, 0.5) 0%, rgba(3, 105, 161, 0.25) 50%, transparent 70%);
+      opacity: 0.75;
+      animation: contactFloat4 10s ease-in-out infinite alternate;
     }
 
     .contact-grain {
@@ -3398,32 +3398,87 @@
     .form-control {
       width: 100%;
       padding: 0.85rem 1.1rem;
-      border: 1px solid rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.28);
       border-radius: var(--radius-md);
       font-family: inherit;
       font-size: 0.9375rem;
-      background: rgba(3, 7, 18, 0.6);
+      background: rgba(3, 7, 18, 0.65);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      color: #FFFFFF;
+      color: #FFFFFF !important;
       transition: all 0.25s ease;
       box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.25);
     }
 
+    /* Placeholders em branco com alto contraste e legibilidade impecável (Desktop & Mobile) */
     .form-control::placeholder {
-      color: #64748B;
+      color: rgba(255, 255, 255, 0.88) !important;
+      font-weight: 500;
+      opacity: 1;
+    }
+
+    .form-control::-webkit-input-placeholder {
+      color: rgba(255, 255, 255, 0.88) !important;
+      font-weight: 500;
+      opacity: 1;
+    }
+
+    .form-control::-moz-placeholder {
+      color: rgba(255, 255, 255, 0.88) !important;
+      font-weight: 500;
+      opacity: 1;
+    }
+
+    .form-control:-ms-input-placeholder {
+      color: rgba(255, 255, 255, 0.88) !important;
+      font-weight: 500;
+      opacity: 1;
     }
 
     .form-control:focus {
       outline: none;
       border-color: #38BDF8;
-      background: rgba(15, 23, 42, 0.85);
-      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25), inset 0 2px 4px rgba(0, 0, 0, 0.2);
+      background: rgba(15, 23, 42, 0.9);
+      color: #FFFFFF !important;
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.35), inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    select.form-control {
+      color: #FFFFFF !important;
     }
 
     select.form-control option {
       background: #0B1528;
       color: #FFFFFF;
+    }
+
+    select.form-control option[disabled] {
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    @media (max-width: 768px) {
+      .contact-form-card {
+        padding: 1.75rem 1.15rem 2.25rem !important;
+        border-radius: var(--radius-md) !important;
+      }
+      .form-title {
+        font-size: 1.45rem !important;
+      }
+      .form-subtitle {
+        font-size: 0.875rem !important;
+        margin-bottom: 1.25rem !important;
+        line-height: 1.45 !important;
+      }
+      .form-control {
+        padding: 0.8rem 1rem !important;
+        font-size: 0.9375rem !important;
+      }
+      .btn-submit-form {
+        padding: 0.95rem 1.15rem !important;
+        font-size: 0.9375rem !important;
+        white-space: normal !important;
+        line-height: 1.35 !important;
+      }
     }
 
     .btn-submit-form {
