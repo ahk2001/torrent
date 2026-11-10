@@ -102,12 +102,14 @@
       background-color: var(--neutral-canvas);
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
-      overflow-x: clip;
+      overflow-x: hidden;
+      max-width: 100%;
     }
 
     body {
       min-height: 100vh;
-      overflow-x: clip;
+      overflow-x: hidden;
+      max-width: 100%;
       line-height: 1.6;
       background-color: var(--neutral-canvas);
     }
@@ -437,6 +439,24 @@
       height: 14px;
       fill: currentColor;
       flex-shrink: 0;
+    }
+
+    @media (max-width: 768px) {
+      .btn-cta-nav {
+        padding: 0;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        justify-content: center;
+        gap: 0;
+      }
+      .btn-cta-nav .btn-cta-label {
+        display: none !important; /* Tira a escrita no mobile e deixa apenas o SVG */
+      }
+      .btn-cta-nav svg {
+        width: 18px;
+        height: 18px;
+      }
     }
 
     /* Mobile Menu Toggle */
@@ -2007,6 +2027,9 @@
     .pro-glider-btn {
       position: relative;
       z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
       background: transparent;
       border: none;
       padding: 0.65rem 1.35rem;
@@ -2021,6 +2044,13 @@
       user-select: none;
     }
 
+    .pro-glider-btn svg {
+      width: 15px;
+      height: 15px;
+      flex-shrink: 0;
+      stroke: currentColor;
+    }
+
     .pro-glider-btn:hover {
       color: var(--brand-primary);
     }
@@ -2028,6 +2058,35 @@
     .pro-glider-btn.active {
       color: #FFFFFF;
       font-weight: 700;
+    }
+
+    @media (max-width: 768px) {
+      .pro-glider-container {
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        padding: 0 0.5rem;
+        width: 100%;
+      }
+
+      .pro-glider-wrap {
+        gap: 0.2rem;
+        padding: 4px;
+      }
+
+      .pro-glider-btn {
+        padding: 0.55rem 0.85rem;
+        font-size: 0;
+        gap: 0;
+      }
+
+      .pro-glider-btn span {
+        display: none !important; /* Tira a escrita e deixa apenas o SVG no mobile */
+      }
+
+      .pro-glider-btn svg {
+        width: 18px;
+        height: 18px;
+      }
     }
 
     /* Bento Grid (Inspirado en EL-08 e DEV-16) */
@@ -2102,6 +2161,60 @@
       justify-content: space-between;
       gap: 0.75rem;
       margin-bottom: 1.25rem;
+    }
+
+    @media (max-width: 768px) {
+      .pro-meta-bar {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+      }
+      .pro-bento-card {
+        padding: 1.15rem 0.85rem !important;
+        border-radius: var(--radius-md) !important;
+      }
+      .pro-meta-code {
+        font-size: 0.625rem !important;
+        max-width: 100% !important;
+        line-height: 1.3 !important;
+      }
+      .pro-badge-pill {
+        font-size: 0.65rem !important;
+        padding: 0.22rem 0.55rem !important;
+        white-space: normal !important;
+        max-width: 100% !important;
+        text-align: center !important;
+        line-height: 1.2 !important;
+      }
+      .hero-cap-inner {
+        padding: 0.65rem !important;
+        gap: 0.65rem !important;
+      }
+      .hero-cap-subcard {
+        padding: 0.85rem 0.75rem !important;
+      }
+      .hero-subcard-title {
+        font-size: 1rem !important;
+        word-break: break-word !important;
+      }
+      .hero-subcard-desc {
+        font-size: 0.8125rem !important;
+        line-height: 1.45 !important;
+      }
+      .hero-fundae-ribbon {
+        padding: 0.65rem 0.75rem !important;
+        font-size: 0.78rem !important;
+      }
+      .pro-card-footer {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0.65rem !important;
+        padding-top: 0.85rem !important;
+      }
+      .btn-pro-action {
+        width: 100% !important;
+        justify-content: center !important;
+      }
     }
 
     .pro-meta-code {
@@ -3458,6 +3571,28 @@
       fill: currentColor;
     }
 
+    @media (max-width: 768px) {
+      .whatsapp-floating {
+        bottom: 16px;
+        right: 16px;
+        padding: 0;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        justify-content: center;
+        box-shadow: 0 6px 18px rgba(37, 211, 102, 0.45);
+      }
+
+      .whatsapp-floating span {
+        display: none !important; /* Oculta a escrita no mobile para não tapar nem cortar os cards abaixo */
+      }
+
+      .whatsapp-floating svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+
     /* Scroll reveal transitions */
     .reveal-item {
       opacity: 0;
@@ -3524,6 +3659,10 @@
         <a href="tel:+34961551473" class="btn-phone-nav" title="Llamar directamente a Autoescuela Torrent">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           <span>961 55 14 73</span>
+        </a>
+        <a href="https://wa.me/34607401892?text=%C2%A1Hola!%20Quiero%20informaci%C3%B3n%20para%20matricularme%20en%20Autoescuela%20Torrent." target="_blank" rel="noopener" class="btn-cta-nav" title="Matricularse por WhatsApp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+          <span class="btn-cta-label">Matricularme</span>
         </a>
         <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú de navegación">
           <span></span>
@@ -4006,10 +4145,22 @@
         <div class="pro-glider-container reveal-item">
           <div class="pro-glider-wrap" role="tablist" aria-label="Filtrar cursos profesionales">
             <div class="pro-glider-pill" id="proGliderPill"></div>
-            <button type="button" class="pro-glider-btn active" data-filter="cap" role="tab">CAP Profesional</button>
-            <button type="button" class="pro-glider-btn" data-filter="adr" role="tab">Mercancías ADR</button>
-            <button type="button" class="pro-glider-btn" data-filter="maquinaria" role="tab">Maquinaria & PRL</button>
-            <button type="button" class="pro-glider-btn" data-filter="tramites" role="tab">Tacógrafo & Puntos</button>
+            <button type="button" class="pro-glider-btn active" data-filter="cap" role="tab">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+              <span>CAP Profesional</span>
+            </button>
+            <button type="button" class="pro-glider-btn" data-filter="adr" role="tab">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m10.29 3.86-8.58 14.86A2 2 0 0 0 3.45 22h17.1a2 2 0 0 0 1.74-3.28L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <span>Mercancías ADR</span>
+            </button>
+            <button type="button" class="pro-glider-btn" data-filter="maquinaria" role="tab">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              <span>Maquinaria &amp; PRL</span>
+            </button>
+            <button type="button" class="pro-glider-btn" data-filter="tramites" role="tab">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>Tacógrafo &amp; Puntos</span>
+            </button>
           </div>
         </div>
 
