@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es" class="scroll-smooth preloader-active">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -31,6 +31,264 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 
   <style>
+    /* ==========================================================================
+       0. PRELOADER MODERNO CORPORATIVO - AUTOESCOLA TORRENT
+       ========================================================================== */
+    html.preloader-active,
+    body.preloader-active {
+      overflow: hidden !important;
+      height: 100% !important;
+    }
+
+    #site-preloader {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
+      z-index: 9999999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 50% 45%, #102444 0%, #081120 60%, #030710 100%);
+      color: #ffffff;
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                  visibility 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    #site-preloader.preloader-hidden {
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(1.04);
+      pointer-events: none;
+    }
+
+    .preloader-glow {
+      position: absolute;
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(44, 108, 181, 0.4) 0%, rgba(255, 194, 25, 0.15) 45%, transparent 70%);
+      filter: blur(45px);
+      pointer-events: none;
+      animation: preloaderGlowPulse 3s ease-in-out infinite alternate;
+    }
+
+    .preloader-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      z-index: 2;
+      padding: 2.25rem 2.5rem;
+      border-radius: 24px;
+      background: rgba(11, 21, 40, 0.55);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      max-width: 90vw;
+      width: 350px;
+    }
+
+    .preloader-visual {
+      position: relative;
+      width: 104px;
+      height: 104px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .preloader-spinner-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      animation: preloaderSpin 2.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+
+    .preloader-spinner-circle-bg {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.08);
+      stroke-width: 3.5;
+    }
+
+    .preloader-spinner-circle-bar {
+      fill: none;
+      stroke: url(#preloader-grad);
+      stroke-width: 3.5;
+      stroke-linecap: round;
+      stroke-dasharray: 283;
+      stroke-dashoffset: 75;
+      transform-origin: 50% 50%;
+      animation: preloaderRingDash 1.9s ease-in-out infinite;
+    }
+
+    .preloader-icon-container {
+      position: relative;
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #1d3963 0%, #0d1e38 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.25);
+      overflow: hidden;
+    }
+
+    .preloader-icon-pic {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      animation: preloaderIconBreath 2.4s ease-in-out infinite;
+    }
+
+    .preloader-icon-pic img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+    }
+
+    .preloader-brand-title {
+      font-family: 'Inter Tight', 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 0.35rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+    }
+
+    .preloader-brand-title span {
+      color: #FFC219;
+    }
+
+    .preloader-brand-subtitle {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: #94A3B8;
+      letter-spacing: 0.08em;
+      margin-bottom: 1.6rem;
+      text-transform: uppercase;
+    }
+
+    .preloader-progress-track {
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .preloader-progress-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #2C6CB5 0%, #FFC219 100%);
+      border-radius: 999px;
+      box-shadow: 0 0 14px rgba(255, 194, 25, 0.6);
+      transition: width 0.15s ease-out;
+    }
+
+    .preloader-status {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      margin-top: 0.85rem;
+      font-size: 0.75rem;
+    }
+
+    .preloader-status-text {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.72rem;
+      color: #94A3B8;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+
+    .preloader-percentage {
+      font-family: 'JetBrains Mono', monospace;
+      color: #FFC219;
+      font-weight: 700;
+      font-size: 0.78rem;
+    }
+
+    @keyframes preloaderSpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes preloaderRingDash {
+      0% {
+        stroke-dashoffset: 240;
+        transform: rotate(0deg);
+      }
+      50% {
+        stroke-dashoffset: 60;
+        transform: rotate(180deg);
+      }
+      100% {
+        stroke-dashoffset: 240;
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes preloaderIconBreath {
+      0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
+      }
+      50% {
+        transform: scale(1.08);
+        filter: drop-shadow(0 4px 14px rgba(255, 194, 25, 0.5));
+      }
+    }
+
+    @keyframes preloaderGlowPulse {
+      0% {
+        transform: scale(0.9);
+        opacity: 0.55;
+      }
+      100% {
+        transform: scale(1.15);
+        opacity: 0.95;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .preloader-spinner-svg,
+      .preloader-icon-pic,
+      .preloader-glow {
+        animation: none !important;
+      }
+      #site-preloader {
+        transition: opacity 0.2s ease;
+      }
+    }
+
     /* ==========================================================================
        1. SISTEMA DE DISEÑO DE ALTA CONVERSIÓN - AUTOESCOLA TORRENT
        ========================================================================== */
@@ -3725,7 +3983,137 @@
   </style>
 </head>
 
-<body>
+<body class="preloader-active">
+
+  <!-- ==========================================================================
+       PRELOADER MODERNO CORPORATIVO - AUTOESCOLA TORRENT
+       ========================================================================== -->
+  <div id="site-preloader" role="status" aria-live="polite" aria-label="Cargando Autoescuela Torrent">
+    <div class="preloader-glow" aria-hidden="true"></div>
+    <div class="preloader-card">
+      <div class="preloader-visual">
+        <svg class="preloader-spinner-svg" viewBox="0 0 100 100" aria-hidden="true">
+          <defs>
+            <linearGradient id="preloader-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#2C6CB5" />
+              <stop offset="60%" stop-color="#FFC219" />
+              <stop offset="100%" stop-color="#FFE082" />
+            </linearGradient>
+          </defs>
+          <circle class="preloader-spinner-circle-bg" cx="50" cy="50" r="45" />
+          <circle class="preloader-spinner-circle-bar" cx="50" cy="50" r="45" />
+        </svg>
+
+        <div class="preloader-icon-container">
+          <picture class="preloader-icon-pic">
+            <source srcset="assets/logo%20favicon.png" type="image/png" />
+            <img src="favicon.ico" alt="Autoescuela Torrent" width="46" height="46" />
+          </picture>
+        </div>
+      </div>
+
+      <div class="preloader-brand-title">
+        AUTOESCOLA <span>TORRENT</span>
+      </div>
+      <div class="preloader-brand-subtitle">
+        Formando conductores desde 1983
+      </div>
+
+      <div class="preloader-progress-track">
+        <div id="preloaderProgressFill" class="preloader-progress-fill"></div>
+      </div>
+
+      <div class="preloader-status">
+        <span id="preloaderStatusText" class="preloader-status-text">Iniciando sistema...</span>
+        <span id="preloaderPercent" class="preloader-percentage">0%</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var preloader = document.getElementById('site-preloader');
+      var progressFill = document.getElementById('preloaderProgressFill');
+      var percentText = document.getElementById('preloaderPercent');
+      var statusText = document.getElementById('preloaderStatusText');
+
+      if (!preloader) return;
+
+      var currentProgress = 0;
+      var targetProgress = 25;
+      var isLoaded = false;
+
+      var statusMessages = [
+        { at: 0, text: 'Iniciando sistema...' },
+        { at: 35, text: 'Cargando recursos viales...' },
+        { at: 70, text: 'Optimizando experiencia...' },
+        { at: 95, text: '¡Todo listo!' }
+      ];
+
+      function updateStatus(val) {
+        if (!statusText) return;
+        for (var i = statusMessages.length - 1; i >= 0; i--) {
+          if (val >= statusMessages[i].at) {
+            statusText.textContent = statusMessages[i].text;
+            break;
+          }
+        }
+      }
+
+      var interval = setInterval(function () {
+        if (!isLoaded) {
+          if (targetProgress < 90) {
+            targetProgress += Math.floor(Math.random() * 9) + 4;
+            if (targetProgress > 90) targetProgress = 90;
+          }
+        } else {
+          targetProgress = 100;
+        }
+
+        if (currentProgress < targetProgress) {
+          var step = Math.ceil((targetProgress - currentProgress) * 0.3);
+          currentProgress += Math.max(1, step);
+          if (currentProgress > 100) currentProgress = 100;
+
+          if (progressFill) progressFill.style.width = currentProgress + '%';
+          if (percentText) percentText.textContent = currentProgress + '%';
+          updateStatus(currentProgress);
+        }
+
+        if (isLoaded && currentProgress >= 100) {
+          clearInterval(interval);
+          finishPreloader();
+        }
+      }, 35);
+
+      function finishPreloader() {
+        setTimeout(function () {
+          preloader.classList.add('preloader-hidden');
+          document.documentElement.classList.remove('preloader-active');
+          document.body.classList.remove('preloader-active');
+
+          setTimeout(function () {
+            if (preloader.parentNode) {
+              preloader.parentNode.removeChild(preloader);
+            }
+          }, 750);
+        }, 160);
+      }
+
+      if (document.readyState === 'complete') {
+        isLoaded = true;
+      } else {
+        window.addEventListener('load', function () {
+          isLoaded = true;
+        });
+      }
+
+      // Fallback de segurança para nunca reter o usuário (máx 2.2s)
+      setTimeout(function () {
+        isLoaded = true;
+      }, 2200);
+    })();
+  </script>
 
   <!-- ==========================================================================
        TOP BAR INFORMATIVA Y DE ATENCIÓN DIRECTA
